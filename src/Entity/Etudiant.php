@@ -98,6 +98,16 @@ class Etudiant
      */
     private $filiere;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Semestre::class, inversedBy="etudiants")
+     */
+    private $inscription;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Demande::class, inversedBy="etudiant")
+     */
+    private $demande;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -291,6 +301,30 @@ class Etudiant
     public function setFiliere(?Filiere $filiere): self
     {
         $this->filiere = $filiere;
+
+        return $this;
+    }
+
+    public function getInscription(): ?Semestre
+    {
+        return $this->inscription;
+    }
+
+    public function setInscription(?Semestre $inscription): self
+    {
+        $this->inscription = $inscription;
+
+        return $this;
+    }
+
+    public function getDemande(): ?Demande
+    {
+        return $this->demande;
+    }
+
+    public function setDemande(?Demande $demande): self
+    {
+        $this->demande = $demande;
 
         return $this;
     }
