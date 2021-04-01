@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class TypeDemande
 {
+    const TYPE_SCOLARITE = 'TYPE_SCOLARITE';
+    const TYPE_RELEVE = 'TYPE_RELEVE';
+    const TYPE_STAGE = 'TYPE_STAGE';
     /**
      * @ORM\Id
      * @ORM\GeneratedValue

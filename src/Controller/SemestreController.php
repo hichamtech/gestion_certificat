@@ -17,6 +17,8 @@ class SemestreController extends AbstractController
 {
     /**
      * @Route("/", name="semestre_index", methods={"GET"})
+     * @param SemestreRepository $semestreRepository
+     * @return Response
      */
     public function index(SemestreRepository $semestreRepository): Response
     {
@@ -27,6 +29,8 @@ class SemestreController extends AbstractController
 
     /**
      * @Route("/new", name="semestre_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -50,6 +54,8 @@ class SemestreController extends AbstractController
 
     /**
      * @Route("/{id}", name="semestre_show", methods={"GET"})
+     * @param Semestre $semestre
+     * @return Response
      */
     public function show(Semestre $semestre): Response
     {
@@ -60,6 +66,9 @@ class SemestreController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="semestre_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Semestre $semestre
+     * @return Response
      */
     public function edit(Request $request, Semestre $semestre): Response
     {
@@ -80,6 +89,9 @@ class SemestreController extends AbstractController
 
     /**
      * @Route("/{id}", name="semestre_delete", methods={"POST"})
+     * @param Request $request
+     * @param Semestre $semestre
+     * @return Response
      */
     public function delete(Request $request, Semestre $semestre): Response
     {

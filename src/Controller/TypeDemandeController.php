@@ -17,6 +17,8 @@ class TypeDemandeController extends AbstractController
 {
     /**
      * @Route("/", name="type_demande_index", methods={"GET"})
+     * @param TypeDemandeRepository $typeDemandeRepository
+     * @return Response
      */
     public function index(TypeDemandeRepository $typeDemandeRepository): Response
     {
@@ -27,6 +29,8 @@ class TypeDemandeController extends AbstractController
 
     /**
      * @Route("/new", name="type_demande_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -50,6 +54,8 @@ class TypeDemandeController extends AbstractController
 
     /**
      * @Route("/{id}", name="type_demande_show", methods={"GET"})
+     * @param TypeDemande $typeDemande
+     * @return Response
      */
     public function show(TypeDemande $typeDemande): Response
     {
@@ -60,6 +66,9 @@ class TypeDemandeController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="type_demande_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param TypeDemande $typeDemande
+     * @return Response
      */
     public function edit(Request $request, TypeDemande $typeDemande): Response
     {
@@ -80,6 +89,9 @@ class TypeDemandeController extends AbstractController
 
     /**
      * @Route("/{id}", name="type_demande_delete", methods={"POST"})
+     * @param Request $request
+     * @param TypeDemande $typeDemande
+     * @return Response
      */
     public function delete(Request $request, TypeDemande $typeDemande): Response
     {

@@ -17,6 +17,8 @@ class DemandeController extends AbstractController
 {
     /**
      * @Route("/", name="demande_index", methods={"GET"})
+     * @param DemandeRepository $demandeRepository
+     * @return Response
      */
     public function index(DemandeRepository $demandeRepository): Response
     {
@@ -27,6 +29,8 @@ class DemandeController extends AbstractController
 
     /**
      * @Route("/new", name="demande_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -50,6 +54,8 @@ class DemandeController extends AbstractController
 
     /**
      * @Route("/{id}", name="demande_show", methods={"GET"})
+     * @param Demande $demande
+     * @return Response
      */
     public function show(Demande $demande): Response
     {
@@ -60,6 +66,9 @@ class DemandeController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="demande_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Demande $demande
+     * @return Response
      */
     public function edit(Request $request, Demande $demande): Response
     {
@@ -80,6 +89,9 @@ class DemandeController extends AbstractController
 
     /**
      * @Route("/{id}", name="demande_delete", methods={"POST"})
+     * @param Request $request
+     * @param Demande $demande
+     * @return Response
      */
     public function delete(Request $request, Demande $demande): Response
     {

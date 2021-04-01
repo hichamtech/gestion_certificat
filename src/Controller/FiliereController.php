@@ -17,6 +17,8 @@ class FiliereController extends AbstractController
 {
     /**
      * @Route("/", name="filiere_index", methods={"GET"})
+     * @param FiliereRepository $filiereRepository
+     * @return Response
      */
     public function index(FiliereRepository $filiereRepository): Response
     {
@@ -27,6 +29,8 @@ class FiliereController extends AbstractController
 
     /**
      * @Route("/new", name="filiere_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -50,6 +54,8 @@ class FiliereController extends AbstractController
 
     /**
      * @Route("/{id}", name="filiere_show", methods={"GET"})
+     * @param Filiere $filiere
+     * @return Response
      */
     public function show(Filiere $filiere): Response
     {
@@ -60,6 +66,9 @@ class FiliereController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="filiere_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Filiere $filiere
+     * @return Response
      */
     public function edit(Request $request, Filiere $filiere): Response
     {
@@ -80,6 +89,9 @@ class FiliereController extends AbstractController
 
     /**
      * @Route("/{id}", name="filiere_delete", methods={"POST"})
+     * @param Request $request
+     * @param Filiere $filiere
+     * @return Response
      */
     public function delete(Request $request, Filiere $filiere): Response
     {

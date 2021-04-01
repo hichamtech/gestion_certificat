@@ -17,6 +17,8 @@ class MessageController extends AbstractController
 {
     /**
      * @Route("/", name="message_index", methods={"GET"})
+     * @param MessageRepository $messageRepository
+     * @return Response
      */
     public function index(MessageRepository $messageRepository): Response
     {
@@ -27,6 +29,8 @@ class MessageController extends AbstractController
 
     /**
      * @Route("/new", name="message_new", methods={"GET","POST"})
+     * @param Request $request
+     * @return Response
      */
     public function new(Request $request): Response
     {
@@ -50,6 +54,8 @@ class MessageController extends AbstractController
 
     /**
      * @Route("/{id}", name="message_show", methods={"GET"})
+     * @param Message $message
+     * @return Response
      */
     public function show(Message $message): Response
     {
@@ -60,6 +66,9 @@ class MessageController extends AbstractController
 
     /**
      * @Route("/{id}/edit", name="message_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param Message $message
+     * @return Response
      */
     public function edit(Request $request, Message $message): Response
     {
@@ -80,6 +89,9 @@ class MessageController extends AbstractController
 
     /**
      * @Route("/{id}", name="message_delete", methods={"POST"})
+     * @param Request $request
+     * @param Message $message
+     * @return Response
      */
     public function delete(Request $request, Message $message): Response
     {
