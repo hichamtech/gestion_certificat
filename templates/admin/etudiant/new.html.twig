@@ -1,0 +1,16 @@
+{% extends 'layouts/adminLayout.html.twig' %}
+
+{% block title %}Nouveau Etudiant{% endblock %}
+
+{% block body %}
+    <h1>Enregistrer nouveau Etudiant</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            {{ include('admin/etudiant/_form.html.twig') }}
+
+        </div>
+    </div>
+
+    <a href="{{ path('etudiant_index') }}">retour</a>
+{% endblock %}

@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface
 {
     const ROLE_ETUDIANT = 'ROLE_ETUDIANT';
-    const ROLE_ADMIN = 'ROLE_ETUDIANT';
+    const ROLE_ADMIN = 'ROLE_ADMIN';
 
     /**
      * @ORM\Id

@@ -1,0 +1,11 @@
+{% extends 'layouts/adminLayout.html.twig' %}
+
+{% block title %}New Semestre{% endblock %}
+
+{% block body %}
+    <h1>Create new Semestre</h1>
+
+    {{ include('admin/semestre/_form.html.twig') }}
+
+    <a href="{{ path('semestre_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'layouts/adminLayout.html.twig' %}
+
+{% block title %}SousModule index{% endblock %}
+
+{% block body %}
+    <h1>SousModule index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libele</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sous_module in sous_modules %}
+            <tr>
+                <td>{{ sous_module.id }}</td>
+                <td>{{ sous_module.libele }}</td>
+                <td>
+                    <a href="{{ path('sous_module_show', {'id': sous_module.id}) }}">show</a>
+                    <a href="{{ path('sous_module_edit', {'id': sous_module.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('sous_module_new') }}">Create new</a>
+{% endblock %}
