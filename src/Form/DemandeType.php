@@ -12,7 +12,6 @@ class DemandeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dateValidation')
             ->add('type')
         ;
     }

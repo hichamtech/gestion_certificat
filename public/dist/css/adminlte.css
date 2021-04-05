@@ -178,6 +178,11 @@ a:not([href]):hover {
   color: inherit;
   text-decoration: none;
 }
+.table-title{
+  color:rgba(176,201,222,255)
+
+
+}
 
 pre,
 code,

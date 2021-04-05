@@ -86,7 +86,38 @@ class DemandeController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    /**
+     * @Route("/{id}/valide", name="valide_demande", methods={"GET","POST"})
+     * @param Request $request
+     * @param Demande $demande
+     *
+     */
 
+    public function valideDemande(Request $request,Demande $demande)
+    {
+        $demande->setStatut(Demande::STATUT_IN_PREPARATION);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($demande);
+        $entityManager->flush();
+        return $this->redirectToRoute('demande_index');
+
+
+    }
+     /**
+     * @Route("/{id}/refuse", name="refuser_demande", methods={"GET","POST"})
+     * @param Request $request
+     * @param Demande $demande
+     *
+     */
+    public function refuserDemande(Request $request,Demande $demande)
+    {
+        $demande->setStatut(Demande::STATUT_REFUSE);
+
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($demande);
+        $entityManager->flush();
+        return $this->redirectToRoute('demande_index');
+    }
     /**
      * @Route("/{id}", name="demande_delete", methods={"POST"})
      * @param Request $request
@@ -103,4 +134,6 @@ class DemandeController extends AbstractController
 
         return $this->redirectToRoute('demande_index');
     }
+
+
 }

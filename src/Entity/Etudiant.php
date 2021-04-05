@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=EtudiantRepository::class)
  */
-class Etudiant
+class Etudiant 
 {
     /**
      * @ORM\Id
@@ -96,7 +96,7 @@ class Etudiant
 
     /**
      * @ORM\ManyToOne(targetEntity=Filiere::class, inversedBy="etudiants")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $filiere;
 

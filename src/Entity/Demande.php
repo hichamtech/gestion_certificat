@@ -12,6 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Demande
 {
+    const STATUT_IN_PROGRESS = 'En Cours';
+    const STATUT_IN_PREPARATION = 'En preparation';
+    const STATUT_VALIDE= 'Valider';
+    const STATUT_REFUSE = 'Refuser';
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -36,10 +40,12 @@ class Demande
      */
     private $messages;
 
+  
+
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string", length=50)
      */
-    private $dateValidation;
+    private $statut;
 
     public function __construct()
     {
@@ -124,14 +130,16 @@ class Demande
         return $this;
     }
 
-    public function getDateValidation(): ?\DateTimeInterface
+  
+
+    public function getStatut(): ?string
     {
-        return $this->dateValidation;
+        return $this->statut;
     }
 
-    public function setDateValidation(\DateTimeInterface $dateValidation): self
+    public function setStatut(string $statut): self
     {
-        $this->dateValidation = $dateValidation;
+        $this->statut = $statut;
 
         return $this;
     }

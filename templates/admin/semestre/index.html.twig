@@ -1,35 +1,70 @@
 {% extends 'layouts/adminLayout.html.twig' %}
 
-{% block title %}Semestre index{% endblock %}
+{% block title %}Liste Semestres{% endblock %}
 
 {% block body %}
-    <h1>Semestre index</h1>
+    <section id="main">
+        <div class="dashboard" id="dashboard">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Liste Semestres</h1>
+                </div>
+            </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Libelle</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for semestre in semestres %}
-            <tr>
-                <td>{{ semestre.id }}</td>
-                <td>{{ semestre.libelle }}</td>
-                <td>
-                    <a href="{{ path('semestre_show', {'id': semestre.id}) }}">show</a>
-                    <a href="{{ path('semestre_edit', {'id': semestre.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            <div class="row mt-5">
 
-    <a href="{{ path('semestre_new') }}">Create new</a>
+                <div class="col-md-12">
+                    <div class="card ">
+                        <h4 class="card-title" style="text-align: center;font-weight: bold;background-color: rgb(33, 37, 41)">Liste</h4>
+                        <div class="card-body align-items-center mt-3">
+                            <div class="form-row mb-3">
+                            </div>
+                            <table class="table" style="margin-top:20px;">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Libelle</th>
+                                    <th>actions</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for semestre in semestres %}
+
+
+                                    <tr>
+                                        <td>{{ semestre.id }}</td>
+                                        <td>{{ semestre.libelle }}</td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-sm-2">
+                                                    <a href="{{ path('semestre_edit', {'id': semestre.id}) }}" class="btn btn-warning btn-sm btn-icon icon-left text-light"> Éditer</a>
+                                                </div>
+                                                <div class="col-sm-2">
+                                                    <a href="{{ path('semestre_delete', {'id': semestre.id}) }}" class="btn btn-danger btn-sm btn-icon icon-left text-light"> Supprimer</a>
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                {% else %}
+                                    <tr>
+                                        <td colspan="7"> aucun enregistrement</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            <div class="row mt-3">
+                                <div class="col-md-2">
+                                    <a  class="btn btn-success " href="{{ path('semestre_new') }}" >Nouveau</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
 {% endblock %}

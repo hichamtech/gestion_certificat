@@ -1,0 +1,11 @@
+{% extends 'layouts/etudiantLayout.html.twig' %}
+
+{% block title %}Demande{% endblock %}
+
+{% block body %}
+    <h1>Nouveau</h1>
+
+    {{ include('etudiant/demande/_form.html.twig') }}
+
+    <a href="{{ path('demande_index') }}">retour</a>
+{% endblock %}

@@ -53,7 +53,7 @@ class SousModuleController extends AbstractController
      */
     public function show(SousModule $sousModule): Response
     {
-        return $this->render('sous_module/show.html.twig', [
+        return $this->render('admin/sous_module/show.html.twig', [
             'sous_module' => $sousModule,
         ]);
     }

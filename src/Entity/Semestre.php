@@ -65,32 +65,7 @@ class Semestre
         return $this->etudiants;
     }
 
-    public function addEtudiant(Etudiant $etudiant): self
-    {
-        if (!$this->etudiants->contains($etudiant)) {
-            $this->etudiants[] = $etudiant;
-            $etudiant->setInscription($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEtudiant(Etudiant $etudiant): self
-    {
-        if ($this->etudiants->removeElement($etudiant)) {
-            // set the owning side to null (unless already changed)
-            if ($etudiant->getInscription() === $this) {
-                $etudiant->setInscription(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->libelle;
-    }
+    
 
     /**
      * @return Collection|Inscription[]
@@ -121,6 +96,9 @@ class Semestre
 
         return $this;
     }
-
+    public function __toString()
+    {
+        return $this->libelle;
+    }
 
 }

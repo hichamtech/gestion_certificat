@@ -1,13 +1,13 @@
-{% extends 'layouts/adminLayout.html.twig' %}
+{% extends 'layouts/etudiantLayout.html.twig' %}
 
-{% block title %}Liste Modules{% endblock %}
+{% block title %}Mes Demandes{% endblock %}
 
 {% block body %}
     <section id="main">
         <div class="dashboard" id="dashboard">
             <div class="row">
                 <div class="col-md-6">
-                    <h1>Liste Modules</h1>
+                    <h1>Mes Demandes</h1>
                 </div>
             </div>
 
@@ -22,32 +22,22 @@
                             <table class="table" style="margin-top:20px;">
                                 <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Libelle</th>
-                                    <th>Filiere</th>
-                                    <th>actions</th>
+                                   <td>ID</td>
+                                    <td>Type</td>
+                                    <td>Staut
+                                    <th>Actions</th>
 
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for module in modules %}
+                                {% for demande in demandes %}
 
 
                                     <tr>
-                                        <td>{{ module.id }}</td>
-                                        <td>{{ module.libelle }}</td>
-                                        <td>{{ module.filiere}}</td>
-                                        <td>
-                                            <div class="row">
-                                                <div class="col-sm-2">
-                                                    <a href="{{ path('module_edit', {'id': module.id}) }}" class="btn btn-warning btn-sm btn-icon icon-left text-light"> Éditer</a>
-                                                </div>
-                                                <div class="col-sm-2">
-                                                    <a href="{{ path('module_delete', {'id': module.id}) }}" class="btn btn-danger btn-sm btn-icon icon-left text-light"> Supprimer</a>
-                                                </div>
-
-                                            </div>
-                                        </td>
+                                        <td>{{ demande.id }}</td>
+                                        <td>{{demande.type}}</td>
+                                        <td>{{ demande.statut }}</td>
+                                  
                                     </tr>
 
                                 {% else %}
@@ -59,7 +49,7 @@
                             </table>
                             <div class="row mt-3">
                                 <div class="col-md-2">
-                                    <a  class="btn btn-success " href="{{ path('module_new') }}" >Nouveau</a>
+                                    <a  class="btn btn-success " href={{ path('demande_etudiant_new') }} >Nouveau</a>
                                 </div>
                             </div>
                         </div>
