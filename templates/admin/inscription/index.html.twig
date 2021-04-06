@@ -24,6 +24,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Etudiant</th>
+                                    <th>Filiere
                                     <th>Semestre</th>
                                     <th>actions</th>
 
@@ -36,14 +37,15 @@
                                     <tr>
                                         <td>{{ inscription.id }}</td>
                                         <td>{{ inscription.etudiant }}</td>
+                                        <td>{{inscription.etudiant.filiere}}
                                         <td>{{ inscription.semestre}}</td>
                                         <td>
                                             <div class="row">
                                                 <div class="col-md-3">
-                                                    <a href="{{ path('inscription_edit', {'id': type_demande.id}) }}" class="btn btn-warning btn-sm btn-icon icon-left text-light"> Éditer</a>
+                                                    <a href="{{ path('inscription_edit', {'id': inscription.id}) }}" class="btn btn-warning btn-sm btn-icon icon-left text-light"> Éditer</a>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    <a href="{{ path('inscription_delete', {'id': type_demande.id}) }}" class="btn btn-danger btn-sm btn-icon icon-left text-light"> Supprimer</a>
+                                                    <a href="{{ path('inscription_delete', {'id': inscription.id}) }}" class="btn btn-danger btn-sm btn-icon icon-left text-light"> Supprimer</a>
                                                 </div>
 
                                             </div>

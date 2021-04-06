@@ -97,7 +97,17 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
         }
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        $user = $token->getUser();
+        $hasAccessAdmin = in_array(User::ROLE_ADMIN, $user->getRoles());
+        $hasAccessEtudiant = in_array(User::ROLE_ETUDIANT, $user->getRoles());
+        if ($hasAccessAdmin) {
+            return new RedirectResponse($this->urlGenerator->generate('demande_index'));
+        } else if ($hasAccessEtudiant) {
+            return new RedirectResponse($this->urlGenerator->generate('demande_etudiant_index'));
+        } else {
+            return new RedirectResponse($this->urlGenerator->generate('app_login'));
+
+        }
     }
 
     protected function getLoginUrl()

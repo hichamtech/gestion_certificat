@@ -24,10 +24,10 @@ class DemandeEtudiantController extends AbstractController
      * @param DemandeRepository $demandeRepository
      * @return Response
      */
-    public function index(DemandeRepository $demandeRepository): Response
+    public function index(DemandeRepository $demandeRepository,UserInterface $user): Response
     {
         return $this->render('etudiant/demande/index.html.twig', [
-            'demandes' => $demandeRepository->findAll(),
+            'demandes' => $demandeRepository->findByUserField($user),
         ]);
     }
 

@@ -24,9 +24,11 @@
                             <table class="table" style="margin-top:20px;">
                                 <thead>
                                 <tr>
-                                   <td>ID</td>
-                                    <td>Type</td>
-                                    <td>Staut
+                                   <th>ID</th>
+                                    <th>Type</th>
+                                    <th>Etudiant</th>
+                                    <th>Filiere</th>
+                                    <th>Staut</th>
                                     <th>Actions</th>
 
                                 </tr>
@@ -38,30 +40,23 @@
                                     <tr>
                                         <td>{{ demande.id }}</td>
                                         <td>{{demande.type}}</td>
+                                        <td>{{demande.user.etudiant}}
+                                        <td>{{demande.user.etudiant.filiere}}
                                         <td>{{ demande.statut }}</td>
                                        <td>
                                             <div class="row">
-                                              {#  <div class="col-sm-3">
-                                                    {% if demande.statut == 'En Cours' %}
-                                                    <a href="{{ path('valide_demande', {'id': demande.id}) }}" class="btn btn-success btn-sm btn-icon icon-left text-light"> Valider</a>
-                                                    {% elseif demande.statut == 'En preparation' %}
-                                                        <a href="{{ path('terminer_demande', {'id': demande.id}) }}" class="btn btn-warning btn-sm btn-icon icon-left text-light"> Terminer</a>
-
-                                                    {% endif  %}
-                                                </div>#}
                                               
-
                                                 {% if demande.statut == 'En Cours' %}
-                                                <div class="col-sm-3">
+                                                <div class="col-md-4">
                                                   <a href="{{ path('valide_demande', {'id': demande.id}) }}" class="btn btn-success btn-sm btn-icon icon-left text-light"> Valider</a>
                                                 </div>
-                                                 <div class="col-sm-3">
+                                                 <div class="col-md-4">
                             
                                                     <a href="{{ path('refuser_demande', {'id': demande.id}) }}" class="btn btn-danger btn-sm btn-icon icon-left text-light"> Refuser</a>
                                                     
                                                 </div>
                                                 {% elseif demande.statut == 'En preparation' %}
-                                                <div class="col-sm-3">
+                                                <div class="col-md-3">
                                                         <a href="{{ path('terminer_demande', {'id': demande.id}) }}" class="btn btn-warning btn-sm btn-icon icon-left text-light"> Terminer</a>
                                                 </div>
                                                  {% endif  %}

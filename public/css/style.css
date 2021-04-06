@@ -13,6 +13,10 @@ p {
   background: #e02040;
   color: #fff;
 }
+#logo{
+  width: 20px;
+  height: 20px;
+}
 
 a,
 a:hover,
