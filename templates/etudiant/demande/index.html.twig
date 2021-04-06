@@ -37,19 +37,19 @@
                                         <td>{{ demande.id }}</td>
                                         <td>{{demande.type}}</td>
                                         <td>{{ demande.statut }}</td>
-                                  
-                                    </tr>
                                     <td>
                                         <div class="row">
                                             <div class="col-sm-3">
-                                                {% if demande.statut = 'Terminer' %}
+                                                {% if demande.statut == 'Terminer' %}
                                                     <a href="{{ path('certificat_generator', {'id': demande.id}) }}" class="btn btn-success btn-sm btn-icon icon-left text-light"> Télécharger</a>
-                                                {% else %}
+                                                 {% endif  %}
 
-                                                {% endif  %}
                                             </div>
                                         </div>
                                     </td>
+                                  
+                                    </tr>
+                               
 
                                 {% else %}
                                     <tr>

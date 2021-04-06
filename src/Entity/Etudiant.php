@@ -102,10 +102,6 @@ class Etudiant
 
 
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Demande::class, inversedBy="etudiant")
-     */
-    private $demande;
 
     /**
      * @ORM\OneToMany(targetEntity=Inscription::class, mappedBy="etudiant")
@@ -113,9 +109,11 @@ class Etudiant
     private $inscriptions;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, mappedBy="etudiant", cascade={"persist", "remove"})
      */
     private $user;
+
+   
 
     public function __construct()
     {
@@ -321,18 +319,6 @@ class Etudiant
 
 
 
-    public function getDemande(): ?Demande
-    {
-        return $this->demande;
-    }
-
-    public function setDemande(?Demande $demande): self
-    {
-        $this->demande = $demande;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Inscription[]
      */
@@ -375,10 +361,22 @@ class Etudiant
 
     public function setUser(?User $user): self
     {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setEtudiant(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getEtudiant() !== $this) {
+            $user->setEtudiant($this);
+        }
+
         $this->user = $user;
 
         return $this;
     }
+
+    
 
 
 }

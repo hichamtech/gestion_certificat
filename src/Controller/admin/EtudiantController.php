@@ -58,9 +58,7 @@ class EtudiantController extends AbstractController
                 $etudiant->getCin()
             ));
             $user->setRoles([User::ROLE_ETUDIANT]);
-
-            $etudiant->setUser($user);
-
+            $user->setEtudiant($etudiant);
             $entityManager->persist($user);
             $entityManager->persist($etudiant);
             $entityManager->flush();

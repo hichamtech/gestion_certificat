@@ -41,15 +41,30 @@
                                         <td>{{ demande.statut }}</td>
                                        <td>
                                             <div class="row">
-                                                <div class="col-sm-3">
-                                                    {% if demande.statut = 'En Cours' %}
+                                              {#  <div class="col-sm-3">
+                                                    {% if demande.statut == 'En Cours' %}
                                                     <a href="{{ path('valide_demande', {'id': demande.id}) }}" class="btn btn-success btn-sm btn-icon icon-left text-light"> Valider</a>
-                                                    {% elseif demande.statut = 'Valider' %}
+                                                    {% elseif demande.statut == 'En preparation' %}
                                                         <a href="{{ path('terminer_demande', {'id': demande.id}) }}" class="btn btn-warning btn-sm btn-icon icon-left text-light"> Terminer</a>
-                                                     {% else %}
 
                                                     {% endif  %}
+                                                </div>#}
+                                              
+
+                                                {% if demande.statut == 'En Cours' %}
+                                                <div class="col-sm-3">
+                                                  <a href="{{ path('valide_demande', {'id': demande.id}) }}" class="btn btn-success btn-sm btn-icon icon-left text-light"> Valider</a>
                                                 </div>
+                                                 <div class="col-sm-3">
+                            
+                                                    <a href="{{ path('refuser_demande', {'id': demande.id}) }}" class="btn btn-danger btn-sm btn-icon icon-left text-light"> Refuser</a>
+                                                    
+                                                </div>
+                                                {% elseif demande.statut == 'En preparation' %}
+                                                <div class="col-sm-3">
+                                                        <a href="{{ path('terminer_demande', {'id': demande.id}) }}" class="btn btn-warning btn-sm btn-icon icon-left text-light"> Terminer</a>
+                                                </div>
+                                                 {% endif  %}
                                             </div>
                                         </td>
                                   
