@@ -44,6 +44,7 @@
                                                 <div class="col-sm-3">
                                                     {% if demande.statut = 'En Cours' %}
                                                     <a href="{{ path('valide_demande', {'id': demande.id}) }}" class="btn btn-warning btn-sm btn-icon icon-left text-light"> Valider</a>
+                                                     {% endif  %}
                                                     {% elseif demande.statut = 'Valider' %}
                                                         <a href="#" class="btn btn-warning btn-sm btn-icon icon-left text-light"> Preparer</a>
                                                     {% endif  %}
