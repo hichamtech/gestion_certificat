@@ -15,6 +15,7 @@ class Demande
     const STATUT_IN_PROGRESS = 'En Cours';
     const STATUT_IN_PREPARATION = 'En preparation';
     const STATUT_VALIDE= 'Valider';
+    const STATUT_COMPLETED = 'Terminer';
     const STATUT_REFUSE = 'Refuser';
     /**
      * @ORM\Id

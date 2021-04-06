@@ -93,7 +93,7 @@ class DemandeController extends AbstractController
      *
      */
 
-    public function valideDemande(Request $request,Demande $demande)
+    public function validerDemande(Request $request,Demande $demande)
     {
         $demande->setStatut(Demande::STATUT_IN_PREPARATION);
         $entityManager = $this->getDoctrine()->getManager();
@@ -102,6 +102,19 @@ class DemandeController extends AbstractController
         return $this->redirectToRoute('demande_index');
 
 
+    }
+    /**
+     * @Route("/{id}/terminer", name="terminer_demande", methods={"GET","POST"})
+     * @param Request $request
+     * @param Demande $demande
+     *
+     */
+    public function terminserDemande(Request $request,Demande $demande){
+        $demande->setStatut(Demande::STATUT_COMPLETED);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($demande);
+        $entityManager->flush();
+        return $this->redirectToRoute('demande_index');
     }
      /**
      * @Route("/{id}/refuse", name="refuser_demande", methods={"GET","POST"})

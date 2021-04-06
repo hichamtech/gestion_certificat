@@ -43,13 +43,13 @@
                                             <div class="row">
                                                 <div class="col-sm-3">
                                                     {% if demande.statut = 'En Cours' %}
-                                                    <a href="{{ path('valide_demande', {'id': demande.id}) }}" class="btn btn-warning btn-sm btn-icon icon-left text-light"> Valider</a>
+                                                    <a href="{{ path('valide_demande', {'id': demande.id}) }}" class="btn btn-success btn-sm btn-icon icon-left text-light"> Valider</a>
                                                     {% elseif demande.statut = 'Valider' %}
-                                                        <a href="#" class="btn btn-warning btn-sm btn-icon icon-left text-light"> Preparer</a>
+                                                        <a href="{{ path('terminer_demande', {'id': demande.id}) }}" class="btn btn-warning btn-sm btn-icon icon-left text-light"> Terminer</a>
+                                                     {% else %}
+
                                                     {% endif  %}
                                                 </div>
-
-
                                             </div>
                                         </td>
                                   
