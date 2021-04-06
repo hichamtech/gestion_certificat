@@ -112,6 +112,11 @@ class Etudiant
      */
     private $inscriptions;
 
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     */
+    private $user;
+
     public function __construct()
     {
         $this->inscriptions = new ArrayCollection();
@@ -361,6 +366,18 @@ class Etudiant
     public function __toString()
     {
         return $this->nom.$this->prenom;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 
 

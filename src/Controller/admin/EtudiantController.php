@@ -3,18 +3,27 @@
 namespace App\Controller\admin;
 
 use App\Entity\Etudiant;
+use App\Entity\User;
 use App\Form\EtudiantType;
 use App\Repository\EtudiantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("admin/etudiant")
  */
 class EtudiantController extends AbstractController
 {
+    
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
     /**
      * @Route("/", name="etudiant_index", methods={"GET"})
      * @param EtudiantRepository $etudiantRepository
@@ -40,6 +49,19 @@ class EtudiantController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+
+            //creation user 
+            $user = new User();
+            $user->setEmail($etudiant->getNom().".".$etudiant->getPrenom()."@ensa.ma");
+            $user->setPassword($this->passwordEncoder->encodePassword(
+                $user,
+                $etudiant->getCin()
+            ));
+            $user->setRoles([User::ROLE_ETUDIANT]);
+
+            $etudiant->setUser($user);
+
+            $entityManager->persist($user);
             $entityManager->persist($etudiant);
             $entityManager->flush();
 
