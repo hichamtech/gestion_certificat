@@ -42,6 +42,7 @@ class DemandeEtudiantController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $demande->setStatut(Demande::STATUT_IN_PROGRESS);
+
             $entityManager->persist($demande);
             $entityManager->flush();
 

@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210404143602 extends AbstractMigration
+final class Version20210406133040 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -20,8 +20,8 @@ final class Version20210404143602 extends AbstractMigration
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE demande (id INT AUTO_INCREMENT NOT NULL, type_id INT NOT NULL, date_validation DATE NOT NULL, statut VARCHAR(50) NOT NULL, INDEX IDX_2694D7A5C54C8C93 (type_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE etudiant (id INT AUTO_INCREMENT NOT NULL, filiere_id INT DEFAULT NULL, demande_id INT DEFAULT NULL, code_apogee VARCHAR(50) NOT NULL, nom VARCHAR(50) NOT NULL, prenom VARCHAR(50) NOT NULL, cne VARCHAR(50) NOT NULL, cin VARCHAR(50) NOT NULL, date_naissance DATE NOT NULL, ville_naissance VARCHAR(50) NOT NULL, pays_naissance VARCHAR(50) NOT NULL, sexe VARCHAR(50) NOT NULL, adresse VARCHAR(255) NOT NULL, annee_premiere_inscription VARCHAR(50) NOT NULL, annee_premiere_inscription_sup VARCHAR(50) NOT NULL, annee_premiere_inscription_uni_maro VARCHAR(50) NOT NULL, code_bac VARCHAR(50) NOT NULL, serie_bac VARCHAR(50) NOT NULL, INDEX IDX_717E22E3180AA129 (filiere_id), INDEX IDX_717E22E380E95E18 (demande_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE demande (id INT AUTO_INCREMENT NOT NULL, type_id INT NOT NULL, statut VARCHAR(50) NOT NULL, INDEX IDX_2694D7A5C54C8C93 (type_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE etudiant (id INT AUTO_INCREMENT NOT NULL, filiere_id INT DEFAULT NULL, demande_id INT DEFAULT NULL, user_id INT DEFAULT NULL, code_apogee VARCHAR(50) NOT NULL, nom VARCHAR(50) NOT NULL, prenom VARCHAR(50) NOT NULL, cne VARCHAR(50) NOT NULL, cin VARCHAR(50) NOT NULL, date_naissance DATE NOT NULL, ville_naissance VARCHAR(50) NOT NULL, pays_naissance VARCHAR(50) NOT NULL, sexe VARCHAR(50) NOT NULL, adresse VARCHAR(255) NOT NULL, annee_premiere_inscription VARCHAR(50) NOT NULL, annee_premiere_inscription_sup VARCHAR(50) NOT NULL, annee_premiere_inscription_uni_maro VARCHAR(50) NOT NULL, code_bac VARCHAR(50) NOT NULL, serie_bac VARCHAR(50) NOT NULL, INDEX IDX_717E22E3180AA129 (filiere_id), INDEX IDX_717E22E380E95E18 (demande_id), UNIQUE INDEX UNIQ_717E22E3A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE filiere (id INT AUTO_INCREMENT NOT NULL, libelle VARCHAR(50) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE inscription (id INT AUTO_INCREMENT NOT NULL, etudiant_id INT DEFAULT NULL, semestre_id INT DEFAULT NULL, INDEX IDX_5E90F6D6DDEAB1A3 (etudiant_id), INDEX IDX_5E90F6D65577AFDB (semestre_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE message (id INT AUTO_INCREMENT NOT NULL, demande_id INT DEFAULT NULL, title VARCHAR(255) NOT NULL, content LONGTEXT NOT NULL, INDEX IDX_B6BD307F80E95E18 (demande_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
@@ -33,6 +33,7 @@ final class Version20210404143602 extends AbstractMigration
         $this->addSql('ALTER TABLE demande ADD CONSTRAINT FK_2694D7A5C54C8C93 FOREIGN KEY (type_id) REFERENCES type_demande (id)');
         $this->addSql('ALTER TABLE etudiant ADD CONSTRAINT FK_717E22E3180AA129 FOREIGN KEY (filiere_id) REFERENCES filiere (id)');
         $this->addSql('ALTER TABLE etudiant ADD CONSTRAINT FK_717E22E380E95E18 FOREIGN KEY (demande_id) REFERENCES demande (id)');
+        $this->addSql('ALTER TABLE etudiant ADD CONSTRAINT FK_717E22E3A76ED395 FOREIGN KEY (user_id) REFERENCES `user` (id)');
         $this->addSql('ALTER TABLE inscription ADD CONSTRAINT FK_5E90F6D6DDEAB1A3 FOREIGN KEY (etudiant_id) REFERENCES etudiant (id)');
         $this->addSql('ALTER TABLE inscription ADD CONSTRAINT FK_5E90F6D65577AFDB FOREIGN KEY (semestre_id) REFERENCES semestre (id)');
         $this->addSql('ALTER TABLE message ADD CONSTRAINT FK_B6BD307F80E95E18 FOREIGN KEY (demande_id) REFERENCES demande (id)');
@@ -51,6 +52,7 @@ final class Version20210404143602 extends AbstractMigration
         $this->addSql('ALTER TABLE sous_module DROP FOREIGN KEY FK_DC3BD4DFAFC2B591');
         $this->addSql('ALTER TABLE inscription DROP FOREIGN KEY FK_5E90F6D65577AFDB');
         $this->addSql('ALTER TABLE demande DROP FOREIGN KEY FK_2694D7A5C54C8C93');
+        $this->addSql('ALTER TABLE etudiant DROP FOREIGN KEY FK_717E22E3A76ED395');
         $this->addSql('DROP TABLE demande');
         $this->addSql('DROP TABLE etudiant');
         $this->addSql('DROP TABLE filiere');
