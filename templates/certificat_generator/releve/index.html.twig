@@ -1,0 +1,48 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Demande de relevé de note</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
+<body>
+<h4>Objet: Demande de relevé de note</h4>
+
+
+<div class="row">
+    <div class="col-md-6">
+
+        <p>Monsieur (Madame) le proviseur ou (le doyen),</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <p>J’ai l’honneur de vous demander par la présente de bien vouloir me délivrer mon relevé de notes pour l’année scolaire 2021</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <p>Je vous transmets ci-après les renseignements me concernant :</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <p>({{demande.user.etudiant.nom}} {{demande.user.etudiant.prenom}}, 
+            Né(e) le : {{ demande.user.etudiant.dateNaissance ? demande.user.etudiant.dateNaissance|date('d-m-Y') : '' }}, à {{demande.user.etudiant.villeNaissance}}, 
+            N° CIN : {{demande.user.etudiant.cin}}, Filiere {{demande.user.etudiant.filiere}} ).</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <p>Né(e) le : {{ demande.user.etudiant.dateNaissance ? demande.user.etudiant.dateNaissance|date('d-m-Y') : '' }}, à {{demande.user.etudiant.villeNaissance}}</p>
+    <div>
+</div>
+
+<div class="row">
+    <div class="col">
+     <h3>Signature</h3>
+
+    </div>
+</div>
+</body>
+</html>

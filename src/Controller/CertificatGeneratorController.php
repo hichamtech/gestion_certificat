@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Demande;
+use App\Entity\TypeDemande;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,9 +13,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class CertificatGeneratorController extends AbstractController
 {
     /**
-     * @Route("/certificat", name="certificat_generator")
+     * @Route("/certificat/{id}", name="certificat_generator")
      */
-    public function generatePdf(): Response
+    public function generatePdf(Demande $demande): Response
     {
 
         //Configure Dompdf according to your needs
@@ -24,9 +26,25 @@ class CertificatGeneratorController extends AbstractController
         $dompdf = new Dompdf($pdfOptions);
 
         // Retrieve the HTML generated in our twig file
-        $html = $this->renderView('certificat_generator/scolarite/index.html.twig', [
-            'title' => "Welcome to our PDF Test"
-        ]);
+        $typeDemande = $demande->getType()->getLibele();
+        if($typeDemande == TypeDemande::TYPE_RELEVE){
+            $html = $this->renderView('certificat_generator/releve/index.html.twig', [
+                'demande' => $demande
+            ]);
+
+        }
+        if($typeDemande == TypeDemande::TYPE_SCOLARITE){
+            $html = $this->renderView('certificat_generator/scolarite/index.html.twig', [
+                'demande' => $demande
+            ]);
+        }
+        if($typeDemande == TypeDemande::TYPE_STAGE){
+            $html = $this->renderView('certificat_generator/stage/index.html.twig', [
+                'demande' => $demande
+            ]);
+        }
+
+       
 
         // Load HTML to Dompdf
         $dompdf->loadHtml($html);
