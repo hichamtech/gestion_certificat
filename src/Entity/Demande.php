@@ -12,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Demande
 {
+    const STATUT_IN_PROGRESS = 'En Cours';
+    const STATUT_IN_PREPARATION = 'En preparation';
+    const STATUT_VALIDE= 'Valider';
+    const STATUT_COMPLETED = 'Terminer';
+    const STATUT_REFUSE = 'Refuser';
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -20,10 +25,7 @@ class Demande
     private $id;
 
 
-    /**
-     * @ORM\OneToMany(targetEntity=Etudiant::class, mappedBy="demande")
-     */
-    private $etudiant;
+  
 
     /**
      * @ORM\ManyToOne(targetEntity=TypeDemande::class, inversedBy="demandes")
@@ -36,14 +38,20 @@ class Demande
      */
     private $messages;
 
+  
+
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string", length=50)
      */
-    private $dateValidation;
+    private $statut;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="demande")
+     */
+    private $user;
 
     public function __construct()
     {
-        $this->etudiant = new ArrayCollection();
         $this->messages = new ArrayCollection();
     }
 
@@ -52,35 +60,6 @@ class Demande
         return $this->id;
     }
     
-    /**
-     * @return Collection|Etudiant[]
-     */
-    public function getEtudiant(): Collection
-    {
-        return $this->etudiant;
-    }
-
-    public function addEtudiant(Etudiant $etudiant): self
-    {
-        if (!$this->etudiant->contains($etudiant)) {
-            $this->etudiant[] = $etudiant;
-            $etudiant->setDemande($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEtudiant(Etudiant $etudiant): self
-    {
-        if ($this->etudiant->removeElement($etudiant)) {
-            // set the owning side to null (unless already changed)
-            if ($etudiant->getDemande() === $this) {
-                $etudiant->setDemande(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getType(): ?TypeDemande
     {
@@ -124,14 +103,28 @@ class Demande
         return $this;
     }
 
-    public function getDateValidation(): ?\DateTimeInterface
+  
+
+    public function getStatut(): ?string
     {
-        return $this->dateValidation;
+        return $this->statut;
     }
 
-    public function setDateValidation(\DateTimeInterface $dateValidation): self
+    public function setStatut(string $statut): self
     {
-        $this->dateValidation = $dateValidation;
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

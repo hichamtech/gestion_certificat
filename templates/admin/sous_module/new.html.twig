@@ -1,0 +1,11 @@
+{% extends 'layouts/adminLayout.html.twig' %}
+
+{% block title %}New SousModule{% endblock %}
+
+{% block body %}
+    <h1>Create new SousModule</h1>
+
+    {{ include('admin/sous_module/_form.html.twig') }}
+
+    <a href="{{ path('sous_module_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'layouts/adminLayout.html.twig' %}
+
+
+
+{% block title %}Demandes{% endblock %}
+
+{% block body %}
+    <section id="main">
+        <div class="dashboard" id="dashboard">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Demandes</h1>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+
+                <div class="col-md-12">
+                    <div class="card ">
+                        <h4 class="card-title" style="text-align: center;font-weight: bold;background-color: rgb(33, 37, 41)">Liste</h4>
+                        <div class="card-body align-items-center mt-3">
+                            <div class="form-row mb-3">
+                            </div>
+                            <table class="table" style="margin-top:20px;">
+                                <thead>
+                                <tr>
+                                   <th>ID</th>
+                                    <th>Type</th>
+                                    <th>Etudiant</th>
+                                    <th>Filiere</th>
+                                    <th>Staut</th>
+                                    <th>Actions</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for demande in demandes %}
+
+
+                                    <tr>
+                                        <td>{{ demande.id }}</td>
+                                        <td>{{demande.type}}</td>
+                                        <td>{{demande.user.etudiant}}
+                                        <td>{{demande.user.etudiant.filiere}}
+                                        <td>{{ demande.statut }}</td>
+                                       <td>
+                                            <div class="row">
+                                              
+                                                {% if demande.statut == 'En Cours' %}
+                                                <div class="col-md-4">
+                                                  <a href="{{ path('valide_demande', {'id': demande.id}) }}" class="btn btn-success btn-sm btn-icon icon-left text-light"> Valider</a>
+                                                </div>
+                                                 <div class="col-md-4">
+                            
+                                                    <a href="{{ path('refuser_demande', {'id': demande.id}) }}" class="btn btn-danger btn-sm btn-icon icon-left text-light"> Refuser</a>
+                                                    
+                                                </div>
+                                                {% elseif demande.statut == 'En preparation' %}
+                                                <div class="col-md-3">
+                                                        <a href="{{ path('terminer_demande', {'id': demande.id}) }}" class="btn btn-warning btn-sm btn-icon icon-left text-light"> Terminer</a>
+                                                </div>
+                                                 {% endif  %}
+                                            </div>
+                                        </td>
+                                  
+                                    </tr>
+
+                                     
+                                {% else %}
+                                    <tr>
+                                        <td colspan="7"> aucun enregistrement</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+{% endblock %}

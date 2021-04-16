@@ -1,0 +1,53 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Demande Scolarite</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+</head>
+<body>
+<h4>Attestation de Stage</h4>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <p>Je, soussigné(e) [nom, prénom] : Agissant en tant que : [précisez] :</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <p>Certifie que Madame/Monsieur {{demande.user.etudiant.nom}} {{demande.user.etudiant.prenom}} :</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <p>Né(e) le : {{ demande.user.etudiant.dateNaissance ? demande.user.etudiant.dateNaissance|date('d-m-Y') : '' }}, à {{demande.user.etudiant.villeNaissance}}</p>
+    <div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <p>N° CIN : {{demande.user.etudiant.cin}}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <p>a effectué un stage dans notre entreprise </p>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+       <p> En Filiere  :{{demande.user.etudiant.filiere}}</p>
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+     <h3>Signature</h3>
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{% extends 'layouts/adminLayout.html.twig' %}
+
+{% block title %}Edit Module{% endblock %}
+
+{% block body %}
+    <h1>Edit Module</h1>
+
+    {{ include('admin/module/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('module_index') }}">back to list</a>
+
+    {{ include('admin/module/_delete_form.html.twig') }}
+{% endblock %}

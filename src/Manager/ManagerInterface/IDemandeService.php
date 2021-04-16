@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Manager;
+namespace App\Manager\ManagerInterface;
 
 
 interface IDemandeService

@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\EtudiantRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=EtudiantRepository::class)
  */
-class Etudiant
+class Etudiant 
 {
     /**
      * @ORM\Id
@@ -94,19 +96,29 @@ class Etudiant
 
     /**
      * @ORM\ManyToOne(targetEntity=Filiere::class, inversedBy="etudiants")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $filiere;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Semestre::class, inversedBy="etudiants")
-     */
-    private $inscription;
+
+
 
     /**
-     * @ORM\ManyToOne(targetEntity=Demande::class, inversedBy="etudiant")
+     * @ORM\OneToMany(targetEntity=Inscription::class, mappedBy="etudiant")
      */
-    private $demande;
+    private $inscriptions;
+
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, mappedBy="etudiant", cascade={"persist", "remove"})
+     */
+    private $user;
+
+   
+
+    public function __construct()
+    {
+        $this->inscriptions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -305,27 +317,66 @@ class Etudiant
         return $this;
     }
 
-    public function getInscription(): ?Semestre
+
+
+    /**
+     * @return Collection|Inscription[]
+     */
+    public function getInscriptions(): Collection
     {
-        return $this->inscription;
+        return $this->inscriptions;
     }
 
-    public function setInscription(?Semestre $inscription): self
+    public function addInscription(Inscription $inscription): self
     {
-        $this->inscription = $inscription;
+        if (!$this->inscriptions->contains($inscription)) {
+            $this->inscriptions[] = $inscription;
+            $inscription->setEtudiant($this);
+        }
 
         return $this;
     }
 
-    public function getDemande(): ?Demande
+    public function removeInscription(Inscription $inscription): self
     {
-        return $this->demande;
-    }
-
-    public function setDemande(?Demande $demande): self
-    {
-        $this->demande = $demande;
+        if ($this->inscriptions->removeElement($inscription)) {
+            // set the owning side to null (unless already changed)
+            if ($inscription->getEtudiant() === $this) {
+                $inscription->setEtudiant(null);
+            }
+        }
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->nom." ".$this->prenom;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setEtudiant(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getEtudiant() !== $this) {
+            $user->setEtudiant($this);
+        }
+
+        $this->user = $user;
+
+        return $this;
+    }
+
+    
+
+
 }

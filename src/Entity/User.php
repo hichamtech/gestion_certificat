@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -13,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface
 {
     const ROLE_ETUDIANT = 'ROLE_ETUDIANT';
-    const ROLE_ADMIN = 'ROLE_ETUDIANT';
+    const ROLE_ADMIN = 'ROLE_ADMIN';
 
     /**
      * @ORM\Id
@@ -37,6 +39,23 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Etudiant::class, inversedBy="user", cascade={"persist", "remove"})
+     */
+    private $etudiant;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Demande::class, mappedBy="user")
+     */
+    private $demande;
+
+    public function __construct()
+    {
+        $this->demande = new ArrayCollection();
+    }
+
+
 
     public function getId(): ?int
     {
@@ -118,4 +137,47 @@ class User implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+    public function getEtudiant(): ?Etudiant
+    {
+        return $this->etudiant;
+    }
+
+    public function setEtudiant(?Etudiant $etudiant): self
+    {
+        $this->etudiant = $etudiant;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Demande[]
+     */
+    public function getDemande(): Collection
+    {
+        return $this->demande;
+    }
+
+    public function addDemande(Demande $demande): self
+    {
+        if (!$this->demande->contains($demande)) {
+            $this->demande[] = $demande;
+            $demande->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDemande(Demande $demande): self
+    {
+        if ($this->demande->removeElement($demande)) {
+            // set the owning side to null (unless already changed)
+            if ($demande->getUser() === $this) {
+                $demande->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

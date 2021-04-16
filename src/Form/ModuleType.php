@@ -13,6 +13,7 @@ class ModuleType extends AbstractType
     {
         $builder
             ->add('libelle')
+            ->add('filiere')
         ;
     }
 

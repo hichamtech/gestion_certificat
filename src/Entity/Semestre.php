@@ -29,9 +29,15 @@ class Semestre
      */
     private $etudiants;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Inscription::class, mappedBy="semestre")
+     */
+    private $inscriptions;
+
     public function __construct()
     {
         $this->etudiants = new ArrayCollection();
+        $this->inscriptions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -59,25 +65,40 @@ class Semestre
         return $this->etudiants;
     }
 
-    public function addEtudiant(Etudiant $etudiant): self
+    
+
+    /**
+     * @return Collection|Inscription[]
+     */
+    public function getInscriptions(): Collection
     {
-        if (!$this->etudiants->contains($etudiant)) {
-            $this->etudiants[] = $etudiant;
-            $etudiant->setInscription($this);
+        return $this->inscriptions;
+    }
+
+    public function addInscription(Inscription $inscription): self
+    {
+        if (!$this->inscriptions->contains($inscription)) {
+            $this->inscriptions[] = $inscription;
+            $inscription->setSemestre($this);
         }
 
         return $this;
     }
 
-    public function removeEtudiant(Etudiant $etudiant): self
+    public function removeInscription(Inscription $inscription): self
     {
-        if ($this->etudiants->removeElement($etudiant)) {
+        if ($this->inscriptions->removeElement($inscription)) {
             // set the owning side to null (unless already changed)
-            if ($etudiant->getInscription() === $this) {
-                $etudiant->setInscription(null);
+            if ($inscription->getSemestre() === $this) {
+                $inscription->setSemestre(null);
             }
         }
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->libelle;
+    }
+
 }

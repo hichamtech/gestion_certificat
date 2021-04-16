@@ -1,0 +1,70 @@
+{% extends 'layouts/adminLayout.html.twig' %}
+
+{% block title %}Liste Filiere{% endblock %}
+
+{% block body %}
+    <section id="main">
+        <div class="dashboard" id="dashboard">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Liste Filiere</h1>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+
+                <div class="col-md-12">
+                    <div class="card ">
+                        <h4 class="card-title" style="text-align: center;font-weight: bold;background-color: rgb(33, 37, 41)">Liste</h4>
+                        <div class="card-body align-items-center mt-3">
+                            <div class="form-row mb-3">
+                            </div>
+                            <table class="table" style="margin-top:20px;">
+                                <thead>
+                                <tr>
+                                   <td>ID</td>
+                                    <td>libelle</td>
+                                    <th>Actions</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for filiere in filieres %}
+
+
+                                    <tr>
+                                        <td>{{ filiere.id }}</td>
+                                        <td>{{ filiere.libelle }}</td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <a href="{{ path('filiere_edit', {'id': filiere.id}) }}" class="btn btn-warning btn-sm btn-icon icon-left text-light"> Éditer</a>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <a href="{{ path('filiere_delete', {'id': filiere.id}) }}" class="btn btn-danger btn-sm btn-icon icon-left text-light"> Supprimer</a>
+                                                </div>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                {% else %}
+                                    <tr>
+                                        <td colspan="7"> aucun enregistrement</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            <div class="row mt-3">
+                                <div class="col-md-2">
+                                    <a  class="btn btn-success " href="{{ path('filiere_new') }}" >Nouveau</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+{% endblock %}

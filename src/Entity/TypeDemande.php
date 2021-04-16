@@ -12,9 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class TypeDemande
 {
-    const TYPE_SCOLARITE = 'TYPE_SCOLARITE';
-    const TYPE_RELEVE = 'TYPE_RELEVE';
-    const TYPE_STAGE = 'TYPE_STAGE';
+    const TYPE_SCOLARITE = 'Certificat de scolarité';
+    const TYPE_RELEVE = 'Relevé des notes';
+    const TYPE_STAGE = 'Demande de stage';
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -100,4 +100,11 @@ class TypeDemande
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->libele;
+    }
+
+
 }
